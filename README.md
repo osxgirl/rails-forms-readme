@@ -8,7 +8,7 @@ tags: forms, form_for, form_tag, fields_for, collection_check_boxes, collection_
 - Uses tag form elements to build out a form
 - Unlike the `form_for` helper, it does not use a form builder
 
-```ruby
+```
 <%= form_tag("/cats") do %>
   <%= label_tag('cat[name]', "Name") %>
   <%= text_field_tag('cat[name]') %>
@@ -41,7 +41,7 @@ This will build a form that looks like this:
     - if i had `form_for(@cat)`, then the form field params would look like `cat[name]`, `cat[color]`, etc
 - in keeping with Rails convention regarding RESTful routes, there should be a resource declared for each model object (eg, `resources :cats`)
 
-```ruby
+```
 <%= form_for(@cat) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>
@@ -75,7 +75,7 @@ The `form_for` above will render the following HTML:
 - `fields_for` allows you to render form fields for an object that's' associated with the original form object
 - form helper calls the assocation organizations, and provides fields for that association
 
-```ruby
+```
 <%= form_for(@cat) do |f| %>
   <%= f.text_field :name %>
   <%= f.fields_for(:organizations, Organization.new) do |org_field| %>
@@ -120,7 +120,7 @@ The `form_for` above will render the following HTML:
 - In this case, this form assumes that there is a one-to-many relationship in place (movie has one director, director has many movies)
 - Used in this case with a form builder element in a `form_for` helper
 
-```ruby
+```
 <%= form_for(@movie) do |f| %>
   <%= f.label :name %>
   <%= f.text_field :name %>

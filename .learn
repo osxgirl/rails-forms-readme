@@ -1,0 +1,9 @@
+languages:
+  - ruby
+tags:
+  - forms
+  - form_for
+  - form_tag
+  - fields_for
+  - collection_check_boxes
+  - collection_select

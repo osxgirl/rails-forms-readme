@@ -16,7 +16,7 @@ tags: forms, form_for, form_tag, fields_for, collection_check_boxes, collection_
   <%= label_tag('cat[color]', "Color") %>
   <%= text_field_tag('cat[color]') %>
 
-  <% submit_tag "Create Cat" %>
+  <%= submit_tag "Create Cat" %>
 <% end %>
 ```
 

@@ -1,7 +1,4 @@
----
-languages: ruby
-tags: forms, form_for, form_tag, fields_for, collection_check_boxes, collection_select
----
+
 
 ## Form_tag
 - Most basic form helper that's available in Rails

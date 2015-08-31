@@ -1,5 +1,4 @@
 
-
 ## Form_tag
 - Most basic form helper that's available in Rails
 - Uses tag form elements to build out a form
@@ -69,7 +68,7 @@ The `form_for` above will render the following HTML:
 
 ## Fields_for
 - `fields_for` is a method that can be called on a form builder element
-- `fields_for` allows you to render form fields for an object that's' associated with the original form object
+- `fields_for` allows you to render form fields for an object that's associated with the original form object
 - form helper calls the assocation organizations, and provides fields for that association
 
 ```erb

@@ -1,5 +1,4 @@
 
-
 ## Form_tag
 - Most basic form helper that's available in Rails
 - Uses tag form elements to build out a form
@@ -76,7 +75,7 @@ The `form_for` above will render the following HTML:
 <%= form_for(@cat) do |f| %>
   <%= f.text_field :name %>
   <%= f.fields_for(:organizations, Organization.new) do |org_field| %>
-    <% org.field.text_field :name %>
+    <% org_field.text_field :name %>
   <% end %>
   <%= f.submit %>
 <% end %>

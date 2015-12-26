@@ -113,35 +113,6 @@ So when would you choose one over the other? Below are some real world examples:
 * `form_tag` - this works well for forms that are not directly connected with models. For example, let's say that our blog posting application has a search engine, the search form would be a great fit for using `form_tag`.
 
 
-## Fields_for
-
-Attributes for `fields_for`:
-
-- `fields_for` is a method that can be called on a form builder element
-
-- `fields_for` allows you to render form fields for an object that's associated with the original form object
-
-- form helper calls the assocation organizations, and provides fields for that association
-
-Let's look at the below example of how you can integrate the `fields_for` helper:
-
-```erb
-<%= form_for(@cat) do |f| %>
-  <%= f.text_field :name %>
-  <%= f.fields_for(:organizations, Organization.new) do |org_field| %>
-    <% org_field.text_field :name %>
-  <% end %>
-  <%= f.submit %>
-<% end %>
-```
-
-Assuming that you have the `accepts_nested_attributes_for :organization` method set up in your `Cat` model and your params in your controller set up so that it accepts `organizations_attributes`, this form will also create an organization that's associated with the cat.
-
-For example, if I created a cat named `Gerald`, and I provided the name `Catnappers` to the name attribute of the organization field, when I click `Create`, it will create a `Cat` object with the name `Gerald`, and is associated with an Organization object named `Catnappers`.
-
-We won't go into detail on the nested form setup, this is more complex behavior that resides in the model, but it's good to know how this can be integrated into a form.
-
-
 ## Other Form Elements
 
 ### `collection_check_boxes`
@@ -161,6 +132,20 @@ Below is an example on how you can implement `collection_check_boxes`:
 
   <%= f.submit %>
 <% end %>
+```
+
+So what HTML does this generate for us?
+
+```HTML
+<form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="m/SHRwLJ+S90q4QP20l44ljhlpbjrkWK3g+BVBtUzOjtfVnJ1I3j8IBEBQJfNn/utS0N8yp8nidyTM9t55x6Iw==" />
+  
+  <label for="book_title">Title</label>
+  <input type="text" name="book[title]" id="book_title" />
+
+  <input type="checkbox" value="1" name="book[author_id][]" id="book_author_id_1" /><label for="book_author_id_1">Stephen King</label><input type="hidden" name="book[author_id][]" value="" />
+
+  <input type="submit" name="commit" value="Create Book" />
+</form>
 ```
 
 - This form has a `collection_check_boxes` field, and there are several parameters passed in:
@@ -184,6 +169,21 @@ Below is a sample implementation on how `collection_select` can be used in an ap
 
   <%= f.submit %>
 <% end %>
+```
+
+Here is the HTML that this code generates:
+
+```HTML
+<form class="new_movie" id="new_movie" action="/movies" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="bTialQ7whOvgjtJVtBL1RUaJ4lF+avBNhZNmp8LciQIbsUQb2LSeNBRhU1gwbfJJq0V5NLe4K+Ap0CiePhQ/yQ==" />
+  <label for="movie_name">Name</label>
+  <input type="text" name="movie[name]" id="movie_name" />
+
+  <select name="movie[director_id]" id="movie_director_id"><option value="1">ALFRED HITCHCOCK</option></select>
+  <select name="movie[director_id]" id="movie_director_id"><option value="2">ORSON WELLES</option></select>
+  <select name="movie[director_id]" id="movie_director_id"><option value="2">JOHN FORD</option></select>
+
+  <input type="submit" name="commit" value="Create movie" />
+</form>
 ```
 
 - This form has a `collection_select` field, and there are several parameters being passed in:

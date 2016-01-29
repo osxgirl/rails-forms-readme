@@ -201,3 +201,4 @@ Here is the HTML that this code generates:
 - In Rails, you have this convention that separates the routes from the controllers
 
 - Via the `resources` parameter, Rails metaprograms several routes for you that correspond to specific actions (`get`, `post`, `patch`)
+<p data-visibility='hidden'>View <a href='https://learn.co/lessons/rails-forms-readme' title='Form_tag'>Form_tag</a> on Learn.co and start learning to code for free.</p>

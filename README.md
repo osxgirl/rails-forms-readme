@@ -21,7 +21,7 @@ In this lesson we will review:
 * Walk through the different form options
 
 
-## Form_tag
+## `form_tag`
 
 Attributes of the `form_tag` helper:
 
@@ -57,7 +57,7 @@ This will build a form and auto generate the following HTML:
 </form>
 ```
 
-## Form_for
+## `form_for`
 
 Attributes for the `form_for` form helper method:
 
@@ -93,7 +93,6 @@ The `form_for` above will auto generate the following HTML:
 </form>
 ```
 
-
 ## Differences between `form_for` and `form_tag`
 
 Getting back to our roadtrip example, in order to make an informed decision on what route to take we need to know everything possible about both options. In like manner, in order to make a good choice for which form element to use, it's vital to understand what the differences are for each of them, the differences are subtle but extremely important to understand:
@@ -112,86 +111,6 @@ So when would you choose one over the other? Below are some real world examples:
 
 * `form_tag` - this works well for forms that are not directly connected with models. For example, let's say that our blog posting application has a search engine, the search form would be a great fit for using `form_tag`.
 
-
-## Other Form Elements
-
-### `collection_check_boxes`
-
-- `collection_check_boxes` assumes that there is a `many-to-many` relationship in place. Let's imagine that you have a book publishing application: `books` have many `authors`, `authors` have many `books`
-
-- `collection_check_boxes` typically are used with a form builder element in a `form_for`
-
-Below is an example on how you can implement `collection_check_boxes`:
-
-```erb
-<%= form_for(@book) do |f| %>
-  <%= f.label :title %>
-  <%= f.text_field :title %>
-
-  <%= f.collection_check_boxes :author_ids, Author.all, :id, :name %>
-
-  <%= f.submit %>
-<% end %>
-```
-
-So what HTML does this generate for us?
-
-```HTML
-<form class="new_book" id="new_book" action="/books" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="m/SHRwLJ+S90q4QP20l44ljhlpbjrkWK3g+BVBtUzOjtfVnJ1I3j8IBEBQJfNn/utS0N8yp8nidyTM9t55x6Iw==" />
-  
-  <label for="book_title">Title</label>
-  <input type="text" name="book[title]" id="book_title" />
-
-  <input type="checkbox" value="1" name="book[author_id][]" id="book_author_id_1" /><label for="book_author_id_1">Stephen King</label><input type="hidden" name="book[author_id][]" value="" />
-
-  <input type="submit" name="commit" value="Create Book" />
-</form>
-```
-
-- This form has a `collection_check_boxes` field, and there are several parameters passed in:
-  - The first parameter of the method is `:author_ids`: this is a collection of all of the `:author_id`s that will be passed in if the corresponding checkbox is checked
-  - The second parameter is `Author.all`: this is collection of all of the possible check box options that will be available in the form
-  - The third parameter is `:id`: this is the parameter of an author that will be passed into the `:author_ids` collection once a checkbox is checked
-  - The final parameter is `:name`: this is the attribute of author that will be rendered on the page next to the checkbox
-
-### `collection_select`
-
-- `collection_select` assumes that there is a one-to-many relationship in place. Imagine that you are creating a competitor for IMDB.com, you would have the model of a `movie` that has one `director`, and the `director` model would be setup to have many movies
-
-Below is a sample implementation on how `collection_select` can be used in an application:
-
-```erb
-<%= form_for(@movie) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-
-  <%= f.collection_select :director_id, Director.all, :id, :name %>
-
-  <%= f.submit %>
-<% end %>
-```
-
-Here is the HTML that this code generates:
-
-```HTML
-<form class="new_movie" id="new_movie" action="/movies" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="bTialQ7whOvgjtJVtBL1RUaJ4lF+avBNhZNmp8LciQIbsUQb2LSeNBRhU1gwbfJJq0V5NLe4K+Ap0CiePhQ/yQ==" />
-  <label for="movie_name">Name</label>
-  <input type="text" name="movie[name]" id="movie_name" />
-
-  <select name="movie[director_id]" id="movie_director_id"><option value="1">ALFRED HITCHCOCK</option></select>
-  <select name="movie[director_id]" id="movie_director_id"><option value="2">ORSON WELLES</option></select>
-  <select name="movie[director_id]" id="movie_director_id"><option value="2">JOHN FORD</option></select>
-
-  <input type="submit" name="commit" value="Create movie" />
-</form>
-```
-
-- This form has a `collection_select` field, and there are several parameters being passed in:
-  - The first is the `:director_id`: this is the association of the movie object that you will be making once the form is submitted
-  - The second is `Director.all`: this will provide a collection of all of the directors in the Directors table in the database for the drop-down element in the `collection_select` field
-  - The third is `:id`: this is what `:director_id` will be set to once a director is selected from the list, and once the submit button is clicked, it will save that association to the directors-movies joins table
-  - The final parameter is `:name`: this is the attribute that's shown in the dropdown list of directors (it would be confusing if only the ids of the directors were shown in the list, so we're specifying that it should specifically show the director's name here)
-
 ## Resources in routes.rb
 
 - Probably the biggest difference between Sinatra and Rails
@@ -201,4 +120,5 @@ Here is the HTML that this code generates:
 - In Rails, you have this convention that separates the routes from the controllers
 
 - Via the `resources` parameter, Rails metaprograms several routes for you that correspond to specific actions (`get`, `post`, `patch`)
+
 <p data-visibility='hidden'>View <a href='https://learn.co/lessons/rails-forms-readme' title='Form_tag'>Form_tag</a> on Learn.co and start learning to code for free.</p>
